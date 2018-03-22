@@ -46,7 +46,7 @@ app.get('/Lists/:query', cors(), function(req, res) {
 		}, function(err, result) {
             if (err) throw err;
             if (result) {
-                res.json(JSON.stringify(result))
+                res.json(result)
             } else {
                 res.send(JSON.stringify({
                     error : 'Error'
