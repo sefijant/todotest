@@ -8,6 +8,14 @@ var rp = require('request-promise');
 
 var ObjectId = require('mongodb').ObjectID;
 const mongoURL = "mongodb://todobomdb:TuzLJr7l4azXSM3Z06DzFZfe3MPg4DErOF9cFNxsNv9LV5lsUAjych7VC6lj5YZS4GpUplf4huBkHOSSrZLTNQ==@todobomdb.documents.azure.com:10255/?ssl=true";
+xhr = new XMLHttpRequest();
+xhr.open("GET", url, true);
+
+xhr.onloadend = function() {
+    if(xhr.status == 404) 
+        throw new Error(url + ' replied 404');
+}
+
 
 var ListsSchema = new mongoose.Schema({
     lists: [{
