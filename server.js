@@ -39,7 +39,7 @@ app.use(express.static(__dirname + '/'));
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
 });
-app.get('0.0.0.0/Lists/:query', cors(), function(req, res) {    
+app.get('/Lists/:query', cors(), function(req, res) {    
         var query = req.params.query;
 		Model.find({
 			'category': query
@@ -55,7 +55,7 @@ app.get('0.0.0.0/Lists/:query', cors(), function(req, res) {
         })
     });
 
-    app.get('0.0.0.0/Lists/', cors(), function(req, res) {    
+    app.get('/Lists/', cors(), function(req, res) {    
 		Model.find({}, function(err, result) {
             if (err) throw err;
             if (result) {
