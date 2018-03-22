@@ -68,6 +68,6 @@ app.get('/Lists/:query', cors(), function(req, res) {
         })
     });
 
-app.listen(80);
+app.listen(80, "0.0.0.0");
 
  
