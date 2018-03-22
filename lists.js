@@ -1,4 +1,3 @@
-
 var app = angular.module("ToDo", []);
 app.controller("MainController", function ($scope, $http) {
 	$http.get('/Lists/travel').then(function(response) {
