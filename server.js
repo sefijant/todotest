@@ -5,6 +5,14 @@ var path = require('path');
 var cors = require('cors');
 var Promise = require('bluebird');
 var rp = require('request-promise');
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
+
+
 
 var ObjectId = require('mongodb').ObjectID;
 const mongoURL = "mongodb://todobomdb:TuzLJr7l4azXSM3Z06DzFZfe3MPg4DErOF9cFNxsNv9LV5lsUAjych7VC6lj5YZS4GpUplf4huBkHOSSrZLTNQ==@todobomdb.documents.azure.com:10255/?ssl=true";
@@ -17,7 +25,15 @@ var ListsSchema = new mongoose.Schema({
         uses: Number
         }]
 });
+
+var ListSchema = new mongoose.Schema({
+    name: String,
+    category: String,
+    items: [String],
+    uses: Number
+});
 var Model = mongoose.model('lists', ListsSchema);
+var listModel = mongoose.model('list', ListSchema);
 
 
 // Connect to mongoDB database assuming our database name is "angular-app"
@@ -68,6 +84,18 @@ app.get('/Lists/:query', cors(), function(req, res) {
         })
     });
 
-app.listen(80, "127.0.0.1");
+    app.post('/addList/', function (req, res, next) {
+      var list = new listModel({
+        name: req.body.name,
+        category: req.body.category,
+        items: req.body.items,
+        uses: req.body.uses
+      })
+      list.save(function (err, list) {
+        if (err) { return next(err) }
+        res.json(201, list)
+      })
+    });
+app.listen(80);
 
  

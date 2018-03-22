@@ -24,5 +24,33 @@ app.controller("MainController", function ($scope, $http) {
         }); // end of document ready
     })(jQuery);
 
+    var newList = {
+        "name": "נסיון קליטה",
+        "category": "other",
+        "items": [
+            "1",
+            "כרטיסי"
+        ],
+        "uses": 0
+    };
+    var config = {
+        headers : {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+        }
+    }
+
+    // $http.post('/addList', newList).then(function(response) {
+    //     Console.log(response);
+    // });
+
+    $http.post('/addList/', newList)
+   .then(
+       function(response){
+        console.log(response);
+       }, 
+       function(response){
+        console.log(response);
+       }
+    );
 });
 
