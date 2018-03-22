@@ -55,6 +55,19 @@ app.get('/Lists/:query', cors(), function(req, res) {
         })
     });
 
+    app.get('/Lists/', cors(), function(req, res) {    
+		Model.find({}, function(err, result) {
+            if (err) throw err;
+            if (result) {
+                res.json(result)
+            } else {
+                res.send(JSON.stringify({
+                    error : 'Error'
+                }))
+            }
+        })
+    });
+
 app.listen(80);
 
  
